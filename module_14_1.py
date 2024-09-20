@@ -15,6 +15,9 @@ balance INTEGER)
 ''')
 connection.commit()
 
+cursor.execute('DELETE FROM Users')
+connection.commit()
+
 for i in range(1, 10):
     query = f'''
     INSERT INTO Users
@@ -34,7 +37,7 @@ for i in range(1,10,3):
     cursor.execute(query)
 connection.commit()
 
-query = 'SELECT username, email, age, balance FROM Users'
+query = 'SELECT username, email, age, balance FROM Users WHERE age <> 60'
 cursor.execute(query)
 users = cursor.fetchall()
 for user in users:
